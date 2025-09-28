@@ -6,12 +6,23 @@ import {  Flame, Heart, ShoppingBag, Star } from "lucide-react"
 import Image from "next/image";
 import { useCart } from "@/lib/context/cart-context";
 import { ProductSkeleton } from "@/lib/product/product-skeleton";
-
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+function slugify(str: string) {
+    return str
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "");
+  }
 export default function HotDeal(){
     const [products, setProducts] = useState<Product[]>([]);
     const {addToCart, cart, favouriteBtn, favourite} = useCart();
     const [loading, setLoading] = useState(true); // Add loading state
-
+    const router = useRouter();
+    
+    const ProductDetails =(title : string)=>{
+        router.push(`products/${slugify(title)}`)
+    }
     useEffect(() =>{
         async function load(){
             try{
@@ -27,7 +38,7 @@ export default function HotDeal(){
         load();
     }, []);
     return(
-        <div className="bg-gray-100 pt-20 px-4 " >
+        <div className="bg-gray-100 pt-26 px-4 " >
             <div className="max-w-7xl mx-auto ">
             <div className="md:text-3xl text-xl underline font-semibold ">Hot Deals of the week</div>
 
@@ -37,15 +48,18 @@ export default function HotDeal(){
                     <ProductSkeleton key={index}/>
                 ))
                 : products.filter((product) => product.price <= 40).slice(0, 15).map((product, index)=>(
-                        <div key={index} className="flex flex-col justify-between border border-gray-300 rounded-md ">
+                        <div key={index} onClick={()=>ProductDetails(product.title)} className="flex flex-col justify-between border border-gray-300 rounded-md transform transition duration-300 ease-in-out 
+                        hover:scale-105 hover:shadow-lg cursor-pointer">
                             <div className="bg-gray-50 px-2 py-2">
                                 <div className="flex justify-between ">
                                    <div className="flex items-center cursor-pointer  p-2">
                                        <Flame fill="orange"/>
                                     </div>
-                                   <div onClick={() =>favouriteBtn(product.id)} className={` cursor-pointer flex items-center justify-end p-1 text-xs rounded-full ${favourite.includes(product.id) ? "bg-green-600 text-white " : "border-3 border-neutral-300 "}`}>
-                                       <Heart className=" cursor-pointer " />
+                                    <div className="flex justify-end items-center">
+                                        <div onClick={() =>favouriteBtn(product.id)} className={` cursor-pointer flex items-center  p-2 text-xs rounded-full ${favourite.includes(product.id) ? "bg-green-600 text-white " : "bg-neutral-300 "}`}>
+                                           <Heart className={` cursor-pointer w-4 h-4`}/>
                                     </div>
+                                    </div>  
                                 </div>
                                <Image
                                  alt="product Image"
@@ -54,7 +68,9 @@ export default function HotDeal(){
                                  height={220}
                                />
                             </div>
+                            <Link href={`products/${slugify(product.title)}`}>
                             <div className="px-2 text-[15px] text-neutral-400">{product.title}</div>
+                            </Link>
                             <div className="px-2 text-[16px] font-semibold">{product.description.slice(0, 30)}...</div>
                             <div className="md:flex items-center gap-4 px-2">
                                 <div className="flex gap-1">
@@ -94,7 +110,9 @@ export default function HotDeal(){
                                </div>
                                );
                              })()}
+                            
                             </div>
+                        
                         </div>
                 ))}
             </div>

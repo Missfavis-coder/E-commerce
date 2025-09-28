@@ -29,7 +29,7 @@ export default function ShopByBranch (){
                 <div className="lg:text-3xl text-2xl font-semibold">Shop By Brands</div>
                 <div>View all</div>
             </div>
-            <div className="grid lg:grid-cols-4 gap-4 mt-6 space-y-6 ">
+            <div className="flex flex-wrap items-center gap-6 mt-6 space-y-6 md:space-y-0 ">
                 {features.map((feature, index) => (
                     <div key={index}>
                         <div className="flex items-center gap-3">

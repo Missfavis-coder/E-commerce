@@ -52,7 +52,7 @@ const categories = [
 ]
 export default function Footer(){
     return(
-        <div className="lg:mx-auto mx-4 max-w-7xl mt-15 px-2" style={{ minHeight: "clamp(100px, 150vh, 250px)" }}>
+        <div className="md:mx-auto mx-4 max-w-7xl mt-15 md:px-6 px-2" style={{ minHeight: "clamp(100px, 150vh, 250px)" }}>
             {/**Addresses */}
             <div className="grid lg:grid-cols-4 grid-cols-2 gap-2 space-y-2  ">
                 <div className="flex items-center gap-3">
@@ -134,7 +134,7 @@ export default function Footer(){
                     <input
                     type="text"
                     placeholder="Enter your email"
-                    className="text-[16px] focus:outline-none w-full text-gray-400 px-4 py-2  border border-gray-400 rounded-lg my-3 "
+                    className="text-[15px] focus:outline-none w-full text-gray-600 px-4 py-2  border border-gray-400 rounded-lg my-3 "
                     />
                     <button className="bg-green-900 text-white py-2 rounded-lg">Subscribe</button>
                 </div>

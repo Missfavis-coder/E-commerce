@@ -9,6 +9,9 @@ export type Product = {
     stock: number,
     availabilityStatus: string,
     quantity: number,
+    warrantyInformation: string,
+    returnPolicy: string,
+    brand: string,
     rating: {
       rate: number;
       count: number;

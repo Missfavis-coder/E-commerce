@@ -2,8 +2,10 @@
 import Image from "next/image"
 import { blogs } from "@/constants/constant"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function Blog() {
+    const router = useRouter();
     {/*const Blogs = [
         {
             image: "/assets/asset1.webp",
@@ -41,7 +43,7 @@ export default function Blog() {
                 <div className="lg:text-3xl text-2xl font-semibold my-6 px-6">Latest Blog</div>
                 <div className="grid lg:grid-cols-4 space-x-2 lg:space-y-0 space-y-8 ">
                     {blogs.map((blog, index) => (
-                        <div className="flex flex-col justify-between border border-neutral-200 rounded-md" key={index}>
+                        <div onClick={()=> {router.push(`/blogs/${blog.slug}`)}} className="flex flex-col justify-between border border-neutral-200 rounded-md" key={index}>
                             <div>
                                 <Image
                                 src={blog.image}

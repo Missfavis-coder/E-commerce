@@ -6,12 +6,23 @@ import { Product } from "@/type/type";
 import {  Heart, ShoppingBag, Star } from "lucide-react"
 import { useCart } from "@/lib/context/cart-context";
 import { ProductSkeleton } from "@/lib/product/product-skeleton";
+import { useRouter } from "next/navigation";
 
-
+function slugify(str: string) {
+    return str
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "");
+  }
 export default function Shop(){
     const [products, setProducts] = useState<Product[]>([]);
     const {addToCart, cart, favouriteBtn, favourite} = useCart();
-    const [loading, setLoading] = useState(true); // Add loading state
+    const [loading, setLoading] = useState(true);
+    const router = useRouter();
+    
+    const ProductDetails =(title : string)=>{
+        router.push(`products/${slugify(title)}`)
+    } 
 
     useEffect(() =>{
         async function load(){
@@ -64,7 +75,7 @@ export default function Shop(){
         {label: " Over $500"},
     ]
     return(
-        <div className="mt-20 max-w-7xl mx-auto md:px-6 px-4 ">
+        <div className="mt-25 max-w-7xl mx-auto md:px-6 px-4 ">
             <div className="">
                 <div className="uppercase text-xl font-bold my-6 pt-4" >Get the products as your needs</div>
             </div>
@@ -112,19 +123,20 @@ export default function Shop(){
             </div>
 
             <div className="max-h-[450px] overflow-auto w-full">
-            <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4 mt-8">
+            <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4 mt-8 px-2">
                 {loading ? 
                 Array.from({length: 12}).map((_, index) => (
                     <ProductSkeleton key={index}/>
                 )) :
                 products.slice(0, 15).map((product, index)=>(
-                        <div key={index} className="flex flex-col justify-between border border-gray-300 rounded-md ">
+                        <div key={index} onClick={()=>ProductDetails(product.title)} className="flex flex-col justify-between border border-gray-300 rounded-md transform transition duration-300 ease-in-out 
+                        hover:scale-105 hover:shadow-lg cursor-pointer">
                             <div className="bg-gray-50 px-2 py-2">
-                                <div className="flex items-center justify-end p-2 text-xs rounded-full">
-                               <div onClick={() =>favouriteBtn(product.id)} className={` cursor-pointer flex items-center  p-1 text-xs rounded-full ${favourite.includes(product.id) ? "bg-green-600 text-white " : "border-3 border-neutral-300 "}`}>
-                                  <Heart className=" cursor-pointer"/>
+                            <div className="flex justify-end items-center">
+                               <div onClick={() =>favouriteBtn(product.id)} className={` cursor-pointer flex items-center  p-2 text-xs rounded-full ${favourite.includes(product.id) ? "bg-green-600 text-white " : "bg-neutral-300 "}`}>
+                                  <Heart className={` cursor-pointer w-4 h-4`}/>
                                </div>
-                               </div>
+                            </div>
                                <Image
                                  alt="product Image"
                                  src={product.images?.[0] || "/placeholder.png"}

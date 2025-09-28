@@ -32,6 +32,7 @@ export default async function BlogPage({params}: BlogPageProps) {
       <div className="md:flex gap-4 w-full">
         <div className="md:w-3/4">
           <div className="">
+            
             <Image
               src={blog.image}
               alt={blog.title}
