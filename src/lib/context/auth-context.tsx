@@ -1,7 +1,7 @@
 "use client"
 import { createContext, useState, useContext } from "react";
-import type { ReactNode, Dispatch, SetStateAction } from "react";
-import type { SignupInput } from "../validators/validator";
+import type { ReactNode } from "react";
+
 
 type User = {
     name: string;

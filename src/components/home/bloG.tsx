@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import { blogs } from "@/constants/constant"
+import { blogs } from "@/constants/blog"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 

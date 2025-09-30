@@ -1,6 +1,6 @@
 // src/lib/data/blogs.ts
 
-import { blogs } from "@/constants/constant";
+import { blogs } from "@/constants/blog";
 
 export async function getBlogBySlug(slug: string) {
   // Simulate delay (optional)

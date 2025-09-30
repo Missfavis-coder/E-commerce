@@ -3,7 +3,7 @@ import { getBlogBySlug } from "@/lib/data/blog";
 import { ArrowLeft, Edit } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { blogs } from "@/constants/constant";
+import { blogs } from "@/constants/blog";
 
 type BlogPageProps = {
   params:Promise< {

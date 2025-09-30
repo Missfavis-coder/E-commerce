@@ -4,9 +4,7 @@ import { useCart } from "@/lib/context/cart-context";
 import { Facebook, Github, Heart, Instagram, Search, ShoppingBag, ShoppingBasket, Twitter, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { getProducts } from "@/api/product";
-import { Product } from "@/type/type";
+import { useState } from "react";
 import { useAuth } from "@/lib/context/auth-context";
 
 const navLinks = [
@@ -22,11 +20,11 @@ export default function Header() {
     const {cart, favourite} = useCart();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const router = useRouter();
-    const [query, setQuery] = useState("")
-    const [filtered, setFiltered] = useState<string[]>([]);
-    const [allSuggestions, setAllSuggestions] = useState<string[]>([]);
+   // const [query, setQuery] = useState("")
+   // const [filtered, setFiltered] = useState<string[]>([]);
+    //const [allSuggestions, setAllSuggestions] = useState<string[]>([]);
 
-    useEffect(() =>{
+    {/*useEffect(() =>{
       async function fetchProduct(){
           try{
               const data = await getProducts();
@@ -41,13 +39,13 @@ export default function Header() {
           }
       }
       fetchProduct();
-  }, []);
+  }, []);*/}
   const handleCartButton = ()=>{
     router.push("/carts")
     //alert("hey")
   }
 
-  const handleChange =(e: React.ChangeEvent<HTMLInputElement>) =>{
+  {/*const handleChange =(e: React.ChangeEvent<HTMLInputElement>) =>{
     const value = e.target.value
     setQuery(value)
 
@@ -59,7 +57,7 @@ export default function Header() {
     const matchesQuery = allSuggestions.filter((s) => s.toLowerCase().includes(value.toLowerCase()))
 
     setFiltered(matchesQuery)
-  }
+  }*/}
 
   const isLinkActive = (href: string, activePaths?: string[]) => {
     if (activePaths) {
@@ -171,8 +169,6 @@ export default function Header() {
           <div className="relative flex cursor-pointer w-full">
               <Search size={20} className="hover:text-green-500 absolute md:translate-y-1/2 translate-y-2 translate-x-2 w-5 h-5 text-neutral-500" />
               <input
-               value={query}
-               onChange={handleChange}
               placeholder="Search for Product, Category or brand."
               type="text"
               className="border border-neutral-300 px-8 py-2 md:py-2.5 sm:text-[15px] text-sm text-neutral-600 md:rounded-md rounded-3xl w-full  focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-600"
