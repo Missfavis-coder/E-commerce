@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
-import Header from "@/components/home/navbar";
-import Footer from "@/components/home/footer";
 import { CartProvider } from "@/lib/context/cart-context";
+import { AuthProvider } from "@/lib/context/auth-context";
+import { Toaster } from "react-hot-toast";
 
 // Load Poppins font
 const poppins = Poppins({
@@ -24,13 +24,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <AuthProvider>
       <CartProvider>
       <body className={poppins.className}>
-        <Header/>
         {children}
-        <Footer/>
+        <Toaster position="top-left" reverseOrder={false}/>
       </body>
       </CartProvider>
+      </AuthProvider>
     </html>
   );
 }

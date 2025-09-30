@@ -1,18 +1,39 @@
 "use client"
+import { useAuth } from "@/lib/context/auth-context";
 import { useCart } from "@/lib/context/cart-context";
 import { Trash } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function CartPage() {
-  const { cart, updateCartQuantity, removeFromCart,subtotal } = useCart();
+  const { cart, updateCartQuantity, removeFromCart,subtotal, clearCart } = useCart();
+  const {user} = useAuth();
+  const router = useRouter()
+
+  const checkoutBtn =()=>{
+    if(user){
+      router.push("/")
+      toast.success("Order placed Successfully.")
+      clearCart();
+    }else{
+      toast.error("You must log in before checkout! ", {duration: 10000})
+      router.push("/auth/logIn")
+    }
+  }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 mt-20 bg-gray-50">
+    <div className="max-w-7xl mx-auto p-6 mt-24 bg-gray-50">
       <h1 className="font-semibold text-xl"> Cart ({cart.length})🛒</h1>
       {cart.length === 0 ? (
-        <div className="flex items-center justify-center h-100 ">
-            <div className="bg-white px-6 py-2 shadow-md">Your Cart is Empty.</div>
-        </div>
+        <div className="flex flex-col items-center justify-center py-10 h-[300px]">
+          <p className="text-lg font-medium text-gray-700">🛒 Your cart looks empty</p>
+          <p className="text-sm text-gray-500 mb-4">Browse our collection and add products to your cart.</p>
+          <a href="/shop" className="bg-gradient-to-r from-green-500 to-green-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition">
+            Start Shopping
+          </a>
+      </div>
+      
       ) : (
         <div className="w-full lg:flex lg:items-start gap-4 " >
          <div className="bg-white shadow-md rounded-lg  sm:p-4 p-2 mt-6 lg:w-3/4 " >
@@ -126,7 +147,7 @@ export default function CartPage() {
                <div>${subtotal.toFixed(2)}</div>
             </div>
             <div className="mx-4 mt-8">
-            <button className=" bg-green-600 rounded-md w-full flex items-center justify-center py-2 text-white cursor-pointer">Checkout</button>
+            <button onClick={checkoutBtn} className=" bg-green-600 rounded-md w-full flex items-center justify-center py-2 text-white cursor-pointer">Checkout</button>
             </div>
          </div>
         </div>

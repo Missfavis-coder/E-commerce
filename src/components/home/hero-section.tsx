@@ -22,14 +22,14 @@ export default function HeroSection() {
 
   return (
     <div className="text-white relative mt-32 max-w-7xl mx-auto lg:px-2 px-4 ">
-      <div className="flex justify-between items-center bg-neutral-800 py-8 md:px-14 px-6 rounded-md">
+      <div className="flex justify-between items-center bg-neutral-800 py-8 lg:px-12 md:px-10 px-4 rounded-md">
         <div className=" px-4">
-          <div className="lg:text-4xl text-3xl mb-6">
+          <div className="lg:text-4xl md:text-3xl text-2xl mb-6">
             Grab Up To 50% Off <br /> on Selected headphones
           </div>
           <button className="bg-green-700 py-2 px-4 rounded-md">Buy Now</button>
         </div>
-        <div className="md:flex items-center justify-center hidden pr-15 h-[200px]">
+        <div className="md:flex items-center justify-center hidden pr-15 h-[200px] py-2">
           <Image
             key={headphones[currentIndex]}
             src={headphones[currentIndex]}

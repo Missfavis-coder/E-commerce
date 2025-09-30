@@ -1,12 +1,13 @@
 "use client";
 
 import { useCart } from "@/lib/context/cart-context";
-import { Heart, Search, ShoppingBag } from "lucide-react";
+import { Facebook, Github, Heart, Instagram, Search, ShoppingBag, ShoppingBasket, Twitter, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { getProducts } from "@/api/product";
 import { Product } from "@/type/type";
+import { useAuth } from "@/lib/context/auth-context";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -16,6 +17,7 @@ const navLinks = [
 ];
 
 export default function Header() {
+    const { user } = useAuth()
     const pathname = usePathname();
     const {cart, favourite} = useCart();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -68,14 +70,18 @@ export default function Header() {
 
   const NavLinkItems = ({ isMobile = false }) => (
     <>
+    <div className="text-2xl flex justify-between font-bold">
+      <div>DeCart</div>
+      <div onClick={()=> setIsMenuOpen(false)} className="cursor-pointer"><X /></div>
+    </div>
       {navLinks.map((link, index) => (
         <Link
           key={index}
           href={link.href}
           className={`
-              font-semibold transition-colors text-shadow-green-400 text-neutral-600 " ${isLinkActive(link.href)
+              font-semibold transition-colors flex flex-col " ${isLinkActive(link.href)
                 ? ""
-                : "hover:text-green-600"
+                : "hover:text-gray-400"
               }
           `}
           onClick={() => isMobile && setIsMenuOpen(false)}
@@ -83,6 +89,23 @@ export default function Header() {
           {link.label}
         </Link>
       ))}
+      <div className="space-y-2">
+        <p>Contact Us</p>
+        <div className="flex items-center text-xl space-x-3">
+          <div className="border border-white p-2 rounded-full cursor-pointer"> 
+            <Facebook />
+          </div>
+          <div className="border border-white p-2 rounded-full cursor-pointer"> 
+            <Github />
+          </div>
+          <div className="border border-white p-2 rounded-full cursor-pointer"> 
+            <Twitter />
+          </div>
+          <div className="border border-white p-2 rounded-full cursor-pointer"> 
+            <Instagram />
+          </div>
+        </div>
+      </div>
     </>
   );
 
@@ -90,7 +113,7 @@ export default function Header() {
     <nav 
     className={`w-full fixed top-0 left-0 z-50 transition-colors duration-500 bg-white  `}
     >
-      <div className={` container mx-auto flex justify-between items-center  px-4 md:py-6 lg:px-16 backdrop-blur-[4px] md:h-[80px] h-[100px] pb-12 `}>
+      <div className={` max-w-7xl mx-auto flex justify-between items-center  px-4 md:py-6 lg:px-16 backdrop-blur-[4px] md:h-[80px] h-[100px] pb-12 `}>
         <div className="flex text-2xl font-bold  items-center gap-2">
         <div className="md:hidden flex items-center">
           <button
@@ -135,21 +158,24 @@ export default function Header() {
           </button>
         </div>
           <Link href="/">
-              DeCart
+            <div className="flex items-center gap-1">
+              <ShoppingBasket className="text-green-600 hidden md:flex"/>
+              <p>DeCart</p>
+            </div>
           </Link>
         </div>
 
-        <div className="flex items-center gap-2 absolute md:translate-y-0 translate-y-11 left-1/2 -translate-x-1/2 md:w-xl w-full px-4">
+        <div className="flex items-center gap-2 absolute md:translate-y-0 translate-y-11 left-1/2 -translate-x-1/2 md:w-[450px] w-full px-4">
           {/*<NavLinkItems />*/}
           {/* Search */}
           <div className="relative flex cursor-pointer w-full">
-              <Search size={20} className="hover:text-green-500 absolute md:translate-y-3.5 translate-y-2.5 translate-x-2 w-4 h-4" />
+              <Search size={20} className="hover:text-green-500 absolute md:translate-y-1/2 translate-y-2 translate-x-2 w-5 h-5 text-neutral-500" />
               <input
                value={query}
                onChange={handleChange}
               placeholder="Search for Product, Category or brand."
               type="text"
-              className="border border-neutral-300 px-8 py-2 md:py-2.5 sm:text-[16px] text-sm text-neutral-600 md:rounded-md rounded-3xl w-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-600"
+              className="border border-neutral-300 px-8 py-2 md:py-2.5 sm:text-[15px] text-sm text-neutral-600 md:rounded-md rounded-3xl w-full  focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-600"
               />        
           </div>
           <button className="px-4 md:py-2.5 py-2 bg-green-600 rounded-md text-[16px] text-white cursor-pointer">Search</button>
@@ -183,16 +209,21 @@ export default function Header() {
             </div>
 
             {/* Login button */}
-            <button className="text-black cursor-pointer">Login</button>
+            {/*<button className="text-black cursor-pointer">Login</button>*/}
+            <div className="text-black cursor-pointer">
+              {user ? (<p className="text-sm ">{user.email}</p>) : (<Link href="/auth/logIn"><p className="text-black cursor-pointer" >Login</p></Link>)}
+            </div>
     </div>
 
       </div>
       
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full  h-[300px] py-4 bg-white transition duration-30" id="mobile-menu">
-          <div className="px-2 pt-2 pb-3 space-y-6 sm:px-3 flex flex-col items-center">
+        <div onClick={() => setIsMenuOpen(false)} className="fixed md:hidden inset-0 backdrop-blur-[10px] bg-black/40 z-30">
+        <div className=" fixed top-0 left-0 w-2/3 text-white h-full px-4 py-4 bg-green-900 transition duration-30" id="mobile-menu">
+          <div className="px-2 pt-2 pb-3 space-y-6 sm:px-3 ">
             <NavLinkItems isMobile={true} />
           </div>
+        </div>
         </div>
       )}
     </nav>

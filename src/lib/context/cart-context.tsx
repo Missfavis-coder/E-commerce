@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 interface CartContextType {
   cart: Product[];
   addToCart: (product: Product) => void;
+  clearCart: () => void;
   updateCartQuantity: (productId: number, newQuantity:number) => void;
   removeFromCart : (productId : number) => void;
   subtotal: number;
@@ -54,6 +55,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   const removeFromCart = (productId: number) => {
     setCart(prev => prev.filter(item => item.id !== productId));
   };
+
+//empty cart after checkout
+  const clearCart = () => {
+    setCart([])
+  }
 //subtotal
 const subtotal = cart.reduce((acc, item) => {
     const discountedPrice = item.price * (1 - item.discountPercentage / 100);
@@ -77,7 +83,7 @@ const favouriteBtn =(productId:  number) =>{
     )
 }
   return (
-    <CartContext.Provider value={{ cart, addToCart, favouriteBtn, favourite, updateCartQuantity, removeFromCart, subtotal }}>
+    <CartContext.Provider value={{ cart, clearCart, addToCart, favouriteBtn, favourite, updateCartQuantity, removeFromCart, subtotal }}>
       {children}
     </CartContext.Provider>
   );

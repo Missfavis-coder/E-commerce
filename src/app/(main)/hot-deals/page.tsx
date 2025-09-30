@@ -8,6 +8,7 @@ import { useCart } from "@/lib/context/cart-context";
 import { ProductSkeleton } from "@/lib/product/product-skeleton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 function slugify(str: string) {
     return str
       .toLowerCase()
@@ -99,6 +100,7 @@ export default function HotDeal(){
                                  onClick={() => {
                                  if (!isInCart) {
                                 addToCart(product);
+                                toast.success("Cart Added Successfully.")
                                  }
                                 }}
                                 className={`flex text-sm font-semibold items-center justify-center gap-2 ${

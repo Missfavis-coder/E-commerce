@@ -1,4 +1,5 @@
-import { Clock, Facebook, Github, Linkedin, LocationEdit, Mail, Phone, Twitter, Youtube } from "lucide-react";
+import { Clock, Facebook, Github, Linkedin, LocationEdit, Mail, Phone, ShoppingBasket, Twitter, Youtube } from "lucide-react";
+import Link from "next/link";
 
 const Links = [
     {
@@ -96,7 +97,12 @@ export default function Footer(){
             {/**Main Footer */}
             <div className="grid md:grid-cols-4 mt-8 gap-6 ">
                 <div>
-                    <div className="font-semibold text-2xl">DeCart</div>
+                    <Link href="/">
+                        <div className="flex items-center gap-1">
+                           <ShoppingBasket className="text-green-600 "/>
+                           <p className="font-semibold text-2xl">DeCart</p>
+                         </div>
+                    </Link>
                     <div className="text-neutral-500 text-sm my-4">Discover curated furniture collections at Shopcart, blending style and comfort to elevate your living spaces.</div>
                     <div className="flex gap-4 text-green-700 mt-2">
                         <Youtube />

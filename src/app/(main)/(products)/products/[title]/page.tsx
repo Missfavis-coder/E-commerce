@@ -3,10 +3,8 @@
 import { getProducts } from "@/api/product";
 import AddToCartButton from "@/constants/button";
 import ProductDescription from "@/constants/constant";
-import Button from "@/constants/constant";
-import { Box, Facebook, PaintBucket, ShoppingBasket, Star, Truck, Twitter } from "lucide-react";
+import { Facebook, PaintBucket, ShoppingBasket, Star, Truck, Twitter } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
 
 type ProductPageProps = {
   params:Promise< {
@@ -31,13 +29,13 @@ export default async function ProductPage({params}: ProductPageProps) {
   
 
   return (
-    <div className=" bg-gray-200 rounded-md py-6 px-6 pt-26  ">
+    <div className=" bg-gray-200 rounded-md py-6 px-6 pt-24  ">
       <div className="md:flex max-w-7xl mx-auto pt-10  gap-4 space-y-4 w-full">
-        <div className="bg-white rounded-md md:flex gap-2 p-4 md:w-3/4 ">
+        <div className="bg-white rounded-md lg:flex gap-2 md:gap-4 p-4 md:w-3/4 ">
           {/**first half */}
-          <div className="md:w-1/3 gap-2 ">
+          <div className="lg:w-1/3 flex flex-col items-center gap-2 ">
             <div className=" flex items-center justify-center relative ">
-              <div className="bg-green-500/80 text-sm flex items-center justify-center h-8 w-10 rounded-md text-green-900 font-bold absolute -translate-y-10 translate-x-14">-{product?.discountPercentage.toFixed(0)}%</div>
+              <div className="bg-green-500/80 text-sm flex items-center justify-center h-8 w-10 rounded-md text-green-900 font-bold absolute -translate-y-10 translate-x-10 lg:translate-x-14">-{product?.discountPercentage.toFixed(0)}%</div>
               <Image
               src={product?.images[0] || "/placeholder.png"}
               alt="Product"
@@ -45,8 +43,8 @@ export default async function ProductPage({params}: ProductPageProps) {
               height={180}
               />
             </div>
-            <div className="md:flex hidden flex-col justify-center text-neutral-600 mt-2">
-              <div className="mb-1">Share this product</div>
+            <div className="lg:flex hidden flex-col justify-center text-neutral-600 mt-2">
+              <div className="mb-1 ">Share this product</div>
               <div className="flex gap-2">
                 <div className="border border-neutral-500 p-1 rounded-full text-[12px]"><Facebook  className="text-neutral-500"/></div>
                 <div className="border border-neutral-500 p-1 rounded-full text-[12px]"><Twitter className="text-neutral-500"/></div>

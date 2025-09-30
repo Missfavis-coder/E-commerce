@@ -17,7 +17,7 @@ function slugify(str: string) {
 
 export default function MiniShop(){
 
-    const[sortOrder, setSortOrder] = useState<"beauty" | "fragrances" |"furniture"| "groceries" | "all" | null >("beauty");
+    const[sortOrder, setSortOrder] = useState<"beauty" | "fragrances" |"furniture"| "groceries" | "all"| null  >("beauty");
     const [products, setProducts] = useState<Product[]>([]);
     const {cart, addToCart, favourite, favouriteBtn} = useCart();
     const [loading, setLoading] = useState(true); // Add loading state

@@ -30,7 +30,7 @@ export default function PopularCategories() {
   );
 
   return (
-    <div  className=" border-1 border-neutral-300 rounded-lg my-10 max-w-7xl lg:mx-auto lg:px-8 px-4 py-8">
+    <div  className=" border-1 border-neutral-300 mx-2 rounded-lg my-10 max-w-7xl lg:mx-auto lg:px-8 px-4 py-8">
         <div className="border-b border-neutral-300 ">
             <div className="font-semibold lg:text-3xl text-2xl py-4">Popular Categories</div>
         </div>
