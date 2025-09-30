@@ -40,7 +40,7 @@ export default function Blog() {
     return(
         <div className="max-w-7xl lg:mx-auto mx-2 mt-15 mb-4 px-4 ">
             <div>
-                <div className="lg:text-3xl text-2xl font-semibold my-6 px-6">Latest Blog</div>
+                <div className="lg:text-3xl text-2xl font-semibold my-6 px-2">Latest Blog</div>
                 <div className="grid lg:grid-cols-4 space-x-2 lg:space-y-0 space-y-8 ">
                     {blogs.map((blog, index) => (
                         <div onClick={()=> {router.push(`/blogs/${blog.slug}`)}} className="flex flex-col justify-between border border-neutral-200 rounded-md" key={index}>

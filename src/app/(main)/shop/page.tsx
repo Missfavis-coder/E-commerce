@@ -129,7 +129,7 @@ export default function Shop(){
                     <ProductSkeleton key={index}/>
                 )) :
                 products.slice(0, 15).map((product, index)=>(
-                        <div key={index} onClick={()=>ProductDetails(product.title)} className="flex flex-col justify-between border border-gray-300 rounded-md transform transition duration-300 ease-in-out 
+                        <div key={index} className="flex flex-col justify-between border border-gray-300 rounded-md transform transition duration-300 ease-in-out 
                         hover:scale-105 hover:shadow-lg cursor-pointer">
                             <div className="bg-gray-50 px-2 py-2">
                             <div className="flex justify-end items-center">
@@ -138,14 +138,15 @@ export default function Shop(){
                                </div>
                             </div>
                                <Image
+                                 onClick={()=>ProductDetails(product.title)}
                                  alt="product Image"
                                  src={product.images?.[0] || "/placeholder.png"}
                                   width={220}
                                  height={220}
                                />
                             </div>
-                            <div className="px-2 text-[15px] text-neutral-400">{product.title}</div>
-                            <div className="px-2 text-[16px] font-semibold">{product.description.slice(0, 30)}...</div>
+                            <div onClick={()=>ProductDetails(product.title)} className="px-2 md:text-[15px] text-sm text-neutral-400">{product.title}</div>
+                            <div className="px-2 text-[14px] font-semibold">{product.description.slice(0, 30)}...</div>
                             <div className="md:flex items-center gap-4 px-2">
                                 <div className="flex gap-1">
                                     <Star className="w-3 h-3 " color="green" fill="green" />

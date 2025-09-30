@@ -115,19 +115,20 @@ export default async function BlogPage({params}: BlogPageProps) {
             </div>
           </div>
 
-          <div className="border border-neutral-500 p-6 mt-6 rounded-lg">
+          <div className="border border-neutral-500 md:p-6 p-4 mt-6 rounded-lg">
             <div className="text-[18px] font-semibold mb-2">Popular Blogs</div>
             <div className="space-y-4 mb-2">
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="text-sm flex items-center gap-2 text-neutral-500">
-                  <div className="relative h-[60px] md:w-[80px] w-[100px] rounded-full overflow-hidden">
+                  {/*<div className="relative ">
                     <Image
                       src={blog.image}
                       alt={blog.title}
-                      fill
-                      className="object-cover"
+                      height={80}
+                      width={80}
+                      className="object-cover h-[60px] md:w-[80px] w-[100px] rounded-full"
                     />
-                  </div>
+                  </div>*/}
                   <div>{blog.title}</div>
                 </div>
               ))}

@@ -111,7 +111,7 @@ export default function Header() {
     <nav 
     className={`w-full fixed top-0 left-0 z-50 transition-colors duration-500 bg-white  `}
     >
-      <div className={` max-w-7xl mx-auto flex justify-between items-center  px-4 md:py-6 lg:px-16 backdrop-blur-[4px] md:h-[80px] h-[100px] pb-12 `}>
+      <div className={` max-w-7xl mx-auto flex justify-between items-center  px-4 md:py-6 lg:px-16 py-2 backdrop-blur-[4px] md:h-[80px] h-[100px] pb-12 `}>
         <div className="flex text-2xl font-bold  items-center gap-2">
         <div className="md:hidden flex items-center">
           <button
@@ -186,7 +186,7 @@ export default function Header() {
                 </div>
               ) : <div className="absolute top-12 bg-white rounded-b-md w-full  px-4 max-h-[300px] pb-6 text-center shadow-[8px]">Product searched is not available.</div>}     */}     
         </div>
-        <div className="flex items-center relative md:gap-6 gap-3 text-gray-600">
+        <div className="flex items-center relative md:gap-6 gap-3 text-gray-600 ">
 
              {/* Cart */}
             <div onClick={ handleCartButton} className="relative cursor-pointer">
@@ -206,8 +206,8 @@ export default function Header() {
 
             {/* Login button */}
             {/*<button className="text-black cursor-pointer">Login</button>*/}
-            <div className="text-black cursor-pointer">
-              {user ? (<p className="text-sm ">{user.email}</p>) : (<Link href="/auth/logIn"><p className="text-black cursor-pointer" >Login</p></Link>)}
+            <div className=" cursor-pointer">
+              {user ? (<div className="bg-green-600 md:h-10 md:w-10 h-8 w-8 flex items-center justify-center rounded-full text-white md:text-xl text-[16px] font-semibold"><p className=" uppercase ">{user.email.slice(0,1)}</p></div>) : (<Link href="/auth/logIn"><p className="text-black cursor-pointer" >Login</p></Link>)}
             </div>
     </div>
 
